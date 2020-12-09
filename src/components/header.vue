@@ -3,23 +3,38 @@
     <div class="layer">
       <img
         ref="back"
-        :class="[transition ? 'transitions' : '']"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
         class="back"
         src="../assets/image/W1.png"
       />
     </div>
     <div class="layer">
       <img
+        v-if="persont22 === 3"
         ref="person22"
-        :class="[transition ? 'transitions' : '']"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
         class="person22"
         src="../assets/image/R3.png"
+      />
+      <img
+        v-else-if="persont22 === 2"
+        ref="person22"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
+        class="person22"
+        src="../assets/image/R2.png"
+      />
+      <img
+        v-else
+        ref="person22"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
+        class="person22"
+        src="../assets/image/R1.png"
       />
     </div>
     <div class="layer">
       <img
         ref="hill"
-        :class="[transition ? 'transitions' : '']"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
         class="hill"
         src="../assets/image/W5.png"
       />
@@ -27,7 +42,7 @@
     <div class="layer">
       <img
         ref="leaves"
-        :class="[transition ? 'transitions' : '']"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
         class="leaves"
         src="../assets/image/W2.png"
       />
@@ -35,7 +50,7 @@
     <div class="layer">
       <img
         ref="person33"
-        :class="[transition ? 'transitions' : '']"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
         class="person33"
         src="../assets/image/W4.png"
       />
@@ -43,7 +58,7 @@
     <div class="layer">
       <img
         ref="left"
-        :class="[transition ? 'transitions' : '']"
+        :class="transition ? 'transitiontrue' : 'transitionfalse'"
         class="left"
         src="../assets/image/W3.png"
       />
@@ -58,21 +73,40 @@ export default {
     return {
       initsX: '',
       transition: false,
+      persont22: 3,
     }
   },
   mounted() {
     this.$refs.banner.addEventListener('mousemove', this.onMousemove)
     this.$refs.banner.addEventListener('mouseenter', this.onMouseover)
     this.$refs.banner.addEventListener('mouseleave', this.onMouseleave)
+    this.toAnimation()
   },
   methods: {
+    toAnimation() {
+      setInterval(() => {
+        setTimeout(() => {
+          this.persont22 = 2
+        }, 0)
+        setTimeout(() => {
+          this.persont22 = 0
+        }, 100)
+        setTimeout(() => {
+          this.persont22 = 2
+        }, 400)
+        setTimeout(() => {
+          this.persont22 = 3
+        }, 500)
+      }, 5000)
+    },
     onMouseover(e) {
       this.initsX = e.pageX
       this.transition = false
     },
     onMouseleave() {
+      this.transition = true
       this.$refs.back.style.filter = 'blur(4px)'
-      this.$refs.back.style.filter = 'translate(0px, 0px)'
+      this.$refs.back.style.transform = 'translate(0px, 0px)'
       this.$refs.person22.style.filter = 'blur(0)'
       this.$refs.person22.style.transform = 'translate(0px, 0px)'
       this.$refs.hill.style.filter = 'blur(1px)'
@@ -85,8 +119,6 @@ export default {
       this.$refs.left.style.transform = 'translate(0px, 0px)'
     },
     onMousemove(e) {
-      this.transition = true
-      console.log(e.pageX - this.initsX) // 1919
       const difference = e.pageX - this.initsX
       this.$refs.back.style.filter =
         'blur(' + Math.abs(4 + (e.pageX - this.initsX) / 450) + 'px)'
@@ -128,12 +160,11 @@ export default {
       } else if (difference >= 0 && difference < 1000) {
         this.$refs.person33.style.filter =
           'blur(' + Math.abs(5 - (e.pageX - this.initsX) / 200) + 'px)'
-      }  else if (difference >= 1000 && difference < 1780) {
+      } else if (difference >= 1000 && difference < 1780) {
+        this.$refs.person33.style.filter = 'blur(' + Math.abs(0) + 'px)'
+      } else {
         this.$refs.person33.style.filter =
-          'blur(' + Math.abs(0) + 'px)'
-      }else {
-        this.$refs.person33.style.filter =
-          'blur(' + Math.abs(((e.pageX - this.initsX)-1780) / 28) + 'px)'
+          'blur(' + Math.abs((e.pageX - this.initsX - 1780) / 28) + 'px)'
       }
       this.$refs.person33.style.transform =
         'translate(' + difference / 21.3 + 'px, -2px)'
@@ -174,10 +205,6 @@ export default {
   -ms-flex-pack: center;
   justify-content: center;
 }
-img {
-  width: 100%;
-  height: 178px;
-}
 .back {
   width: 3483px;
   height: 290px;
@@ -214,7 +241,10 @@ img {
   filter: blur(6px);
   transform: translate(0px, 0px);
 }
-.transitions {
-  transition: 0.5s;
+.transitiontrue {
+  transition: 0.3s;
+}
+.transitionfalse {
+  transition: 0s;
 }
 </style>
