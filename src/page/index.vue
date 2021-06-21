@@ -1,21 +1,18 @@
 <template>
-  <div class="hello">
+  <div class="index-box">
     <Header/>
-    <p class="cenber">原凯父亲的空间</p>
+    <img src="https://i.imgur.com/xlm823p.jpg" alt="">
   </div>
 </template>
 
 <script>
 import Header from '@/components/header'
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   components: {
     Header
   }
 }
 </script>
 <style scoped>
-.cenber {
-  color: #f1f1f1;
-}
 </style>
