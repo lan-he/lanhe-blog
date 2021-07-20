@@ -1,4 +1,4 @@
-# blog
+# lan-blog-vue3
 
 ## Project setup
 ```

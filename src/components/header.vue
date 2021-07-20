@@ -67,114 +67,134 @@
 </template>
 
 <script>
+import { reactive, onMounted, ref, toRefs } from 'vue'
 export default {
-  name: 'Header',
-  data() {
-    return {
+  setup() {
+    const banner = ref(null)
+    const back = ref(null)
+    const person22 = ref(null)
+    const person33 = ref(null)
+    const hill = ref(null)
+    const leaves = ref(null)
+    const left = ref(null)
+    const state = reactive({
       initsX: '',
       transition: false,
       persont22: 3,
-    }
-  },
-  mounted() {
-    this.$refs.banner.addEventListener('mousemove', this.onMousemove)
-    this.$refs.banner.addEventListener('mouseenter', this.onMouseover)
-    this.$refs.banner.addEventListener('mouseleave', this.onMouseleave)
-    this.toAnimation()
-  },
-  methods: {
-    toAnimation() {
+    })
+    onMounted(() => {
+      console.log(banner)
+      banner.value.addEventListener('mousemove', onMousemove)
+      banner.value.addEventListener('mouseenter', onMouseover)
+      banner.value.addEventListener('mouseleave', onMouseleave)
+      toAnimation()
+    })
+    const toAnimation = () =>{
       setInterval(() => {
         setTimeout(() => {
-          this.persont22 = 2
+          state.persont22 = 2
         }, 0)
         setTimeout(() => {
-          this.persont22 = 0
+          state.persont22 = 0
         }, 100)
         setTimeout(() => {
-          this.persont22 = 2
+          state.persont22 = 2
         }, 400)
         setTimeout(() => {
-          this.persont22 = 3
+          state.persont22 = 3
         }, 500)
       }, 5000)
-    },
-    onMouseover(e) {
-      this.initsX = e.pageX
-      this.transition = false
-    },
-    onMouseleave() {
-      this.transition = true
-      this.$refs.back.style.filter = 'blur(4px)'
-      this.$refs.back.style.transform = 'translate(0px, 0px)'
-      this.$refs.person22.style.filter = 'blur(0)'
-      this.$refs.person22.style.transform = 'translate(0px, 0px)'
-      this.$refs.hill.style.filter = 'blur(1px)'
-      this.$refs.hill.style.transform = 'translate(-58px, 0px)'
-      this.$refs.leaves.style.filter = 'blur(4px)'
-      this.$refs.leaves.style.transform = 'translate(0px, 5px)'
-      this.$refs.person33.style.filter = 'blur(5px)'
-      this.$refs.person33.style.transform = 'translate(0px, -2px)'
-      this.$refs.left.style.filter = 'blur(6px)'
-      this.$refs.left.style.transform = 'translate(0px, 0px)'
-    },
-    onMousemove(e) {
-      const difference = e.pageX - this.initsX
-      this.$refs.back.style.filter =
-        'blur(' + Math.abs(4 + (e.pageX - this.initsX) / 450) + 'px)'
+    }
+    const onMouseover = (e) => {
+      state.initsX = e.pageX
+      state.transition = false
+    }
+    const onMouseleave = (e) => {
+      state.transition = true
+      back.value.style.filter = 'blur(4px)'
+      back.value.style.transform = 'translate(0px, 0px)'
+      person22.value.style.filter = 'blur(0)'
+      person22.value.style.transform = 'translate(0px, 0px)'
+      hill.value.style.filter = 'blur(1px)'
+      hill.value.style.transform = 'translate(-58px, 0px)'
+      leaves.value.style.filter = 'blur(4px)'
+      leaves.value.style.transform = 'translate(0px, 5px)'
+      person33.value.style.filter = 'blur(5px)'
+      person33.value.style.transform = 'translate(0px, -2px)'
+      left.value.style.filter = 'blur(6px)'
+      left.value.style.transform = 'translate(0px, 0px)'
+    }
+    const onMousemove = (e) => {
+      const difference = e.pageX - state.initsX
+      back.value.style.filter =
+        'blur(' + Math.abs(4 + (e.pageX - state.initsX) / 450) + 'px)'
 
-      this.$refs.person22.style.filter =
-        'blur(' + Math.abs((e.pageX - this.initsX) / 222) + 'px)'
-      this.$refs.person22.style.transform =
-        'translate(' + (e.pageX - this.initsX) / 192 + 'px, 0px)'
+      person22.value.style.filter =
+        'blur(' + Math.abs((e.pageX - state.initsX) / 222) + 'px)'
+      person22.value.style.transform =
+        'translate(' + (e.pageX - state.initsX) / 192 + 'px, 0px)'
 
       if (difference < 0) {
-        this.$refs.hill.style.filter =
-          'blur(' + Math.abs(1 + (e.pageX - this.initsX) / 300) + 'px)'
+        hill.value.style.filter =
+          'blur(' + Math.abs(1 + (e.pageX - state.initsX) / 300) + 'px)'
       } else if (difference >= 0 && difference < 100) {
-        this.$refs.hill.style.filter =
-          'blur(' + Math.abs(1 - (e.pageX - this.initsX) / 100) + 'px)'
+        hill.value.style.filter =
+          'blur(' + Math.abs(1 - (e.pageX - state.initsX) / 100) + 'px)'
       } else {
-        this.$refs.hill.style.filter =
-          'blur(' + Math.abs(1 + (e.pageX - this.initsX) / 606) + 'px)'
+        hill.value.style.filter =
+          'blur(' + Math.abs(1 + (e.pageX - state.initsX) / 606) + 'px)'
       }
-      this.$refs.hill.style.transform =
-        'translate(' + (-58 + (e.pageX - this.initsX) / 80) + 'px, 0px)'
+      hill.value.style.transform =
+        'translate(' + (-58 + (e.pageX - state.initsX) / 80) + 'px, 0px)'
 
       if (difference < 0) {
-        this.$refs.leaves.style.filter =
-          'blur(' + Math.abs(4 + (e.pageX - this.initsX) / 240) + 'px)'
+        leaves.value.style.filter =
+          'blur(' + Math.abs(4 + (e.pageX - state.initsX) / 240) + 'px)'
       } else if (difference >= 0 && difference < 500) {
-        this.$refs.leaves.style.filter =
-          'blur(' + Math.abs(4 - (e.pageX - this.initsX) / 125) + 'px)'
+        leaves.value.style.filter =
+          'blur(' + Math.abs(4 - (e.pageX - state.initsX) / 125) + 'px)'
       } else {
-        this.$refs.leaves.style.filter =
-          'blur(' + Math.abs((e.pageX - this.initsX) / 384) + 'px)'
+        leaves.value.style.filter =
+          'blur(' + Math.abs((e.pageX - state.initsX) / 384) + 'px)'
       }
-      this.$refs.leaves.style.transform =
-        'translate(' + (e.pageX - this.initsX) / 47 + 'px, 5px)'
+      leaves.value.style.transform =
+        'translate(' + (e.pageX - state.initsX) / 47 + 'px, 5px)'
 
       if (difference < 0) {
-        this.$refs.person33.style.filter =
+        person33.value.style.filter =
           'blur(' + Math.abs(5 + -difference / 240) + 'px)'
       } else if (difference >= 0 && difference < 1000) {
-        this.$refs.person33.style.filter =
-          'blur(' + Math.abs(5 - (e.pageX - this.initsX) / 200) + 'px)'
+        person33.value.style.filter =
+          'blur(' + Math.abs(5 - (e.pageX - state.initsX) / 200) + 'px)'
       } else if (difference >= 1000 && difference < 1780) {
-        this.$refs.person33.style.filter = 'blur(' + Math.abs(0) + 'px)'
+        person33.value.style.filter = 'blur(' + Math.abs(0) + 'px)'
       } else {
-        this.$refs.person33.style.filter =
-          'blur(' + Math.abs((e.pageX - this.initsX - 1780) / 28) + 'px)'
+        person33.value.style.filter =
+          'blur(' + Math.abs((e.pageX - state.initsX - 1780) / 28) + 'px)'
       }
-      this.$refs.person33.style.transform =
+      person33.value.style.transform =
         'translate(' + difference / 21.3 + 'px, -2px)'
 
-      this.$refs.left.style.filter =
-        'blur(' + Math.abs(6 - (e.pageX - this.initsX) / 320) + 'px)'
-      this.$refs.left.style.transform =
+      left.value.style.filter =
+        'blur(' + Math.abs(6 - (e.pageX - state.initsX) / 320) + 'px)'
+      left.value.style.transform =
         'translate(' + difference / 18 + 'px, 0px)'
-    },
-  },
+    }
+    return {
+      ...toRefs(state),
+      banner,
+      back,
+      person22,
+      person33,
+      hill,
+      leaves,
+      left,
+      toAnimation,
+      onMouseover,
+      onMouseleave,
+      onMousemove
+    }
+  }
 }
 </script>
 <style scoped>
