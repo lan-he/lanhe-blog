@@ -89,7 +89,7 @@ export default {
       banner.value.addEventListener('mouseleave', onMouseleave)
       toAnimation()
     })
-    const toAnimation = () =>{
+    const toAnimation = () => {
       setInterval(() => {
         setTimeout(() => {
           state.persont22 = 2
@@ -177,8 +177,7 @@ export default {
 
       left.value.style.filter =
         'blur(' + Math.abs(6 - (e.pageX - state.initsX) / 320) + 'px)'
-      left.value.style.transform =
-        'translate(' + difference / 18 + 'px, 0px)'
+      left.value.style.transform = 'translate(' + difference / 18 + 'px, 0px)'
     }
     return {
       ...toRefs(state),
@@ -192,9 +191,9 @@ export default {
       toAnimation,
       onMouseover,
       onMouseleave,
-      onMousemove
+      onMousemove,
     }
-  }
+  },
 }
 </script>
 <style scoped>
