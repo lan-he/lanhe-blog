@@ -4,20 +4,29 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {getListAPI} from '@/api/goods.ts';
+import {getListAPI,articleCreate} from '@/api/goods';
 export default defineComponent({
   name: 'App',
   components: {
   },
   setup() {
     const opens = () => {
-      const as = {
-        username: 'heminxguan',
-        password: '123456'
+      // const as = {
+      //   username: 'heminxguan',
+      //   password: '123456'
+      // }
+      // getListAPI(as).then(res => {
+      //   console.log(res)
+      // })
+      const parameter = {
+        articleTitle: 'heminxguan',
+        articleContent:'sssssssssss'
       }
-      getListAPI(as).then(res => {
+      articleCreate(parameter).then(res => {
         console.log(res)
       })
+
+      
     }
     return {
       opens

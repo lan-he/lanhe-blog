@@ -14,3 +14,10 @@ export function getListAPI(params?:any) {
     data: params
   })
 }
+export function articleCreate(params?:any) {
+  return request({
+    url: `/nest/article/create`,
+    method: 'post',
+    data: params
+  })
+}
