@@ -1,23 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
-    path: '/*',
-    redirect: '/home',
+    path: '/',
+    redirect: '/home'
   },
   {
     path: '/home',
     component: () => import('@/views/index.vue'),
-    alias: ['/homes', '/page'],
+    alias: ['/homes', '/page']
   },
   { path: '/user', component: () => import('@/views/user/user.vue') },
-  {
-    path: '*', 
-    redirect: '/404',
-  },
+  { path: '/404', component: () => import('@/views/currency/404-sky.vue') },
+  { path: '/4041', component: () => import('@/views/currency/404-snow.vue') },
+  // { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/views/currency/404-sky.vue') },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: '/404' }
 ]
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 })
 
 export default router
