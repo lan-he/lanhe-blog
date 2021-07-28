@@ -12,6 +12,7 @@ const routes = [
   { path: '/user', component: () => import('@/views/user/user.vue') },
   { path: '/404', component: () => import('@/views/currency/404-sky.vue') },
   { path: '/4041', component: () => import('@/views/currency/404-snow.vue') },
+  { path: '/4042', component: () => import('@/views/currency/riluo.vue') },
   // { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/views/currency/404-sky.vue') },
   { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: '/404' }
 ]

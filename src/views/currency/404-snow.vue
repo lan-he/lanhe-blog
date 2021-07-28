@@ -49,8 +49,6 @@ export default defineComponent({
         particles.value = []
         for (var i = 0; i < count; i++) {
           particles.value.push(reset())
-          console.log(reset())
-          console.log(particles.value)
         }
       }
 
@@ -61,11 +59,16 @@ export default defineComponent({
         snow.value.height = height
         createParticles((width * height) / 10000)
       }
-
+      interface ProxeeConstructor {
+        y: number
+        dy: number
+        x: number
+        dx: number
+      }
       const updateParticles = () => {
         ctx.clearRect(0, 0, width, height)
         ctx.fillStyle = '#f6f9fa'
-        particles.value.forEach(function (particle: any) {
+        particles.value.forEach((particle: ProxeeConstructor): void => {
           particle.y += particle.dy
           particle.x += particle.dx
 

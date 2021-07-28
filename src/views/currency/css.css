@@ -1,0 +1,51 @@
+@keyframes stars {
+  0% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes bodysss {
+  0% {
+    background-color: #8dcce8;
+  }
+  25% {
+    background-color: #fe9900;
+  }
+  40% {
+    background-color: #222;
+  }
+  60% {
+    background-color: #222;
+  }
+  100% {
+    background-color: #8dcce8;
+  }
+}
+@keyframes bodysss {
+  0% {
+    background-color: #8dcce8;
+  }
+  25% {
+    background-color: #fe9900;
+  }
+  40% {
+    background-color: #222;
+  }
+  60% {
+    background-color: #222;
+  }
+  100% {
+    background-color: #8dcce8;
+  }
+}
