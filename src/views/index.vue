@@ -1,22 +1,21 @@
 <template>
-  <button @click="opens">123</button>
+  <div class="root-box">
+    <Todolist class="todolist" />
+    <!-- <button @click="opens">123</button> -->
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getListAPI, articleCreate } from '@/api/goods'
+import { articleCreate } from '@/api/goods'
+import Todolist from '@/components/todolist.vue'
 export default defineComponent({
   name: 'App',
-  components: {},
+  components: {
+    Todolist
+  },
   setup() {
     const opens = () => {
-      const as = {
-        username: 'heminxguan',
-        password: '123456'
-      }
-      getListAPI(as).then(res => {
-        console.log(res)
-      })
       const parameter = {
         articleTitle: 'heminxguan',
         articleContent: 'sssssssssss'
@@ -32,4 +31,13 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style>
+.root-box {
+  display: flex;
+  justify-content: center;
+}
+.todolist {
+  margin: 0 auto;
+  margin-top: 7%;
+}
+</style>
