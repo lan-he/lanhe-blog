@@ -10,6 +10,7 @@ const routes = [
     alias: ['/homes', '/page']
   },
   { path: '/user', component: () => import('@/views/user/user.vue') },
+  { path: '/lottie', component: () => import('@/views/user/lottie.vue') },
   { path: '/404', component: () => import('@/views/currency/404-sky.vue') },
   { path: '/4041', component: () => import('@/views/currency/404-snow.vue') },
   { path: '/4042', component: () => import('@/views/currency/riluo.vue') },
