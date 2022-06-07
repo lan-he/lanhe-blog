@@ -1,5 +1,5 @@
 import React from 'react'
-import './tic-tac-toe.css'
+import './tic-tac-toe.less'
 function Square(props) {
     return (
         <button className="square" onClick={props.onClickButton}>
@@ -112,7 +112,7 @@ class Game extends React.Component {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
         }
         return (
-            <div className="game">
+            <div className="tic-tac-toe">
                 <div className="game-board">
                     <Board squares={current.squares} onClick={(i) => this.handleClick(i)} />
                 </div>

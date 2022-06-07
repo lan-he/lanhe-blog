@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App'
-import Expenses from './views/home.js'
+import Expenses from './views/home.jsx'
 import Invoices from './views/tic-tac-toe.jsx'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
