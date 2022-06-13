@@ -7,7 +7,7 @@ set -e
 yarn build
 
 # 进入构建文件夹
-cd dist
+cd build
 
 # 如果你要部署到自定义域名
 # echo 'www.example.com' > CNAME

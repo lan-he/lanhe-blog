@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { HashRouter as BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Spin } from 'antd'
 import App from '@/App.jsx'
 import Home from '@/views/home.jsx'
