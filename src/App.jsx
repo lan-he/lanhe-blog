@@ -1,28 +1,45 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import './App.less'
-import html2canvas from 'html2canvas'
 import { Menu } from 'antd'
 import React from 'react'
 
 export default function App() {
+    const menuItems = [
+        {
+            key: 'home',
+            label: '首页',
+            path: '/home',
+        },
+        {
+            key: 'tic-tac-toe',
+            label: '井字棋',
+            path: '/tic-tac-toe',
+        },
+        {
+            key: 'toimg-design',
+            label: '拖拽',
+            path: '/toimg-design',
+        },
+    ]
+    const navigate = useNavigate()
+    const params = useLocation()
+    const onClickMenu = (item) => {
+        console.log(params, 'paramsparams')
+        navigate('/' + item.key)
+    }
+
     return (
         <div>
-            <Menu className="menu-box" mode="horizontal" defaultSelectedKeys={['home']}>
-                <Menu.Item key="home">Navigation One</Menu.Item>
-                <Menu.Item>Navigation One</Menu.Item>
-                <Menu.Item>Navigation One</Menu.Item>
-                <Menu.Item onClick={html2canvasScreenshot}>屏幕截图</Menu.Item>
-            </Menu>
-            <Link to="/home">Invoices</Link> | <Link to="/about">Expenses</Link>
-            <div className="outlet-box">
+            <Menu
+                className="menu-box"
+                mode="horizontal"
+                defaultOpenKeys={['sub1']}
+                items={menuItems}
+                onClick={onClickMenu}
+            />
+            <div className="outlet-box" id="screenshot">
                 <Outlet />
             </div>
         </div>
     )
-}
-function html2canvasScreenshot() {
-    var node = document.getElementById('root')
-    html2canvas(node).then(function (canvas) {
-        document.body.appendChild(canvas)
-    })
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-// import { useLocation } from 'react-router-dom'
 import { Button } from 'antd'
 
 class Home extends React.Component {
