@@ -1,17 +1,14 @@
 import { Modal } from 'antd'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 const ScreenshotModal = (props) => {
     const handleCancel = () => {
         props.onHandleCancel()
     }
-    useEffect(() => {
-        // console.log(props.contextsss, 'contextssscontextssscontextsss')
-    })
     return (
         <>
-            <Modal title="Basic Modal" visible={props.isModalVisible} onOk={handleCancel} onCancel={handleCancel}>
-                <img src={props.imgBeas64Show} alt="屏幕截图" />
+            <Modal title="截图" visible={props.isModalVisible} onOk={handleCancel} onCancel={handleCancel} width={900}>
+                <img style={{ width: '100%' }} src={props.imgBeas64Show} alt="屏幕截图" />
             </Modal>
         </>
     )

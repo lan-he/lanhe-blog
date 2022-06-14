@@ -6,12 +6,8 @@ class Home extends React.Component {
         return (
             <div id="my-node">
                 <span>Home</span>
-                <Button onClick={this.dwiajij} type="primary">
-                    Button
-                </Button>
-                <Button onClick={this.html2canvasDemo} type="primary">
-                    Button2
-                </Button>
+                <Button type="primary">Button</Button>
+                <img src="https://hemingxaun-1256953833.cos.ap-shanghai.myqcloud.com/kaola.png" alt="kaola" />
             </div>
         )
     }
