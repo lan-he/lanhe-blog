@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap');
+
+:root {
+    --bg-color: #ffffff;
+    --dark-bg-color: #1c1c1d;
+    --text-colcr: #212832;
+    --dark-text-color: #eef0f4;
+
+    --text-describe-color: #858c96;
+    --dart-text-describe-color: #8a8c90;
+
+    --border-color: rgba(0, 0, 0, 0.1);
+    --dark-border-color: hsla(0, 0%, 100%, 0.1);
+}
+* {
+    border-color: var(--border-color);
+}
+.dark * {
+    border-color: var(--dark-border-color);
+}
+.text-describe {
+    color: var(--text-describe-color);
+}
+.dark .text-describe {
+    color: var(--dart-text-describe-color);
+}
+body {
+    font-family: 'LXGW WenKai TC', cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    background-color: var(--bg-color);
+    color: var(--text-colcr);
+}
+.dark body {
+    background-color: var(--dark-bg-color);
+    color: var(--dark-text-color);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+    height: auto;
+    width: 100vw;
+    animation: none;
+    mix-blend-mode: normal;
+}
+html.dark {
+    background-color: var(--dark-bg-color);
+}
+html.dark::view-transition-old(root) {
+    z-index: 2147483646;
+}
+html.dark::view-transition-new(root) {
+    z-index: 1;
+}
+html::view-transition-old(root) {
+    z-index: 1;
+}
+html::view-transition-new(root) {
+    z-index: 2147483646;
+}

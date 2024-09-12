@@ -1,24 +1,22 @@
-import React, { Suspense, lazy } from 'react'
-import { HashRouter as BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import { Spin } from 'antd'
-import App from '@/App.jsx'
-import Home from '@/views/home.jsx'
-const TicTacToe = lazy(() => import('@/views/tic-tac-toe.jsx'))
-const ToimgDesign = lazy(() => import('@/views/toimg-design.jsx'))
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Index from '@/views/index.jsx'
+import ErrorPage from '@/views/error-page.jsx'
+import Details from '@/views/details.jsx'
+import Demo from '@/views/demo.jsx'
 
-export default function Router() {
-    return (
-        <BrowserRouter>
-            <Suspense fallback={<Spin delay={1000} />}>
-                <Routes>
-                    <Route path="/" element={<App />}>
-                        <Route index element={<Home />} />
-                        <Route path="tic-tac-toe" element={<TicTacToe />} />
-                        <Route path="toimg-design" element={<ToimgDesign />} />
-                        <Route path="*" element={<Navigate to="/" />} />
-                    </Route>
-                </Routes>
-            </Suspense>
-        </BrowserRouter>
-    )
-}
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Index />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/details',
+        element: <Details />,
+    },
+    {
+        path: '/demo',
+        element: <Demo />,
+    },
+])
+export default router
