@@ -11,4 +11,16 @@ export default defineConfig({
         },
     },
     assetsInclude: ['**/*.md', '**/*.lottie'],
+    server: {
+        port: 8000,
+        host: '0.0.0.0',
+        hmr: true,
+        proxy: {
+            '/api': {
+                target: 'https://lanhe-blog-express.vercel.app', // prod
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, 'api'),
+            },
+        },
+    },
 })
