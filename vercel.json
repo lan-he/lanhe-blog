@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "https://lanhe-blog-express.vercel.app/:path*"
+        }
+    ]
+}
