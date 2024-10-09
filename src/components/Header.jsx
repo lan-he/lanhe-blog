@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import switchTheme from '@/assets/lottie/switch-theme.lottie'
+import Avatar from '@mui/material/Avatar'
+import Drawer from '@mui/material/Drawer'
+import { useSelector, useDispatch } from 'react-redux'
+import { setIsOpenLogin } from '@/store/indexReducer.js'
+import { NavLink } from 'react-router-dom'
 
 function Header() {
     const [dotLottie, setDotLottie] = useState(null)
@@ -29,8 +34,6 @@ function Header() {
         }
     }, [dotLottie])
     const changeTheme = () => {
-        console.log(localStorage.theme, 'localStorage.theme')
-
         if (localStorage.theme == 'light') {
             localStorage.theme = 'dark'
             setLottieMode('forward')
@@ -89,26 +92,67 @@ function Header() {
             )
         })
     }
+    const userInfo = useSelector((state) => state.persist.userInfo)
+    const dispatch = useDispatch()
 
+    const [open, setOpen] = React.useState(false)
+    const onClickProfilePicture = () => {
+        console.log(userInfo, 'userInfouserInfouserInfo')
+        if (userInfo._id) {
+            setOpen(true)
+        } else {
+            dispatch(setIsOpenLogin(true))
+        }
+    }
     return (
         <>
             <div className="flex items-center justify-between w-full px-6 border-b h-14 text-slate-700 dark:text-slate-300">
-                <div>Logo</div>
+                <NavLink
+                    to={`/`}
+                    className={({ isActive }) =>
+                        isActive ? 'text-red-300' : ''
+                    }
+                    end
+                >
+                    Logo
+                </NavLink>
+
                 <div className="flex gap-10">
                     <div>Products</div>
                     <div>Integrations</div>
                     <div>Customers</div>
-                    <div>Education</div>
                 </div>
-                <DotLottieReact
-                    dotLottieRefCallback={setDotLottie}
-                    src={switchTheme}
-                    loop={false}
-                    mode={lottieMode}
-                    className="cursor-pointer h-[64%] w-[150px]"
-                    onClick={updateView}
-                />
+                <div className="flex items-center h-full gap-8">
+                    <DotLottieReact
+                        dotLottieRefCallback={setDotLottie}
+                        src={switchTheme}
+                        loop={false}
+                        mode={lottieMode}
+                        className="cursor-pointer h-[64%]"
+                        onClick={updateView}
+                    />
+                    <Avatar
+                        alt="Login"
+                        src={userInfo.avatar}
+                        className="border border-gray-400 cursor-pointer"
+                        onClick={onClickProfilePicture}
+                    />
+                </div>
             </div>
+            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+                <div className="w-[300px] py-8">
+                    <div className="p-4 cursor-pointer hover:bg-slate-400">
+                        <NavLink
+                            to="/write-article"
+                            className={({ isActive }) =>
+                                isActive ? 'text-red-300' : ''
+                            }
+                        >
+                            写文章
+                        </NavLink>
+                    </div>
+                </div>
+            </Drawer>
         </>
     )
 }

@@ -61,3 +61,11 @@ html::view-transition-old(root) {
 html::view-transition-new(root) {
     z-index: 2147483646;
 }
+@layer base {
+    :root {
+        --radius: 0.5rem;
+    }
+}
+button {
+    text-transform: none !important; //定义带有小写字母和大写字母的标准的文本。
+}
