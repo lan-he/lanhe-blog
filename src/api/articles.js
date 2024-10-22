@@ -21,3 +21,11 @@ export const getArticlest = (data) => {
         method: 'get',
     })
 }
+// 添加文章评论
+export const addComments = (data) => {
+    return service({
+        url: `/api/comments`,
+        method: 'post',
+        data,
+    })
+}

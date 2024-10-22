@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap');
 
 :root {
     --bg-color: #ffffff;
@@ -29,7 +30,6 @@
 }
 body {
     font-family: 'LXGW WenKai TC', cursive;
-    font-weight: 700;
     font-style: normal;
     font-size: 18px;
     background-color: var(--bg-color);

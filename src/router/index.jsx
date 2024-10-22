@@ -5,6 +5,7 @@ import ErrorPage from '@/views/error-page.jsx'
 import Details from '@/views/details.jsx'
 import Demo from '@/views/demo.jsx'
 import WriteArticle from '@/views/write-article.jsx'
+import About from '@/views/about.jsx'
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: '/write-article',
                 element: <WriteArticle />,
+            },
+            {
+                path: '/about',
+                element: <About />,
             },
         ],
     },

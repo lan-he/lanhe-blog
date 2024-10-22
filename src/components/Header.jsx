@@ -114,13 +114,42 @@ function Header() {
                     }
                     end
                 >
-                    Logo
+                    Lanhe 的博客
                 </NavLink>
 
                 <div className="flex gap-10">
-                    <div>Products</div>
-                    <div>Integrations</div>
-                    <div>Customers</div>
+                    <NavLink
+                        to={`/programming`}
+                        className={({ isActive }) =>
+                            isActive ? 'text-red-300' : ''
+                        }
+                    >
+                        编程
+                    </NavLink>
+                    <NavLink
+                        to={`/about`}
+                        className={({ isActive }) =>
+                            isActive ? 'text-red-300' : ''
+                        }
+                    >
+                        关于我
+                    </NavLink>
+                    <NavLink
+                        to={`/message-board`}
+                        className={({ isActive }) =>
+                            isActive ? 'text-red-300' : ''
+                        }
+                    >
+                        留言板
+                    </NavLink>
+                    <NavLink
+                        to={`/travel-notes`}
+                        className={({ isActive }) =>
+                            isActive ? 'text-red-300' : ''
+                        }
+                    >
+                        游记
+                    </NavLink>
                 </div>
                 <div className="flex items-center h-full gap-8">
                     <DotLottieReact
