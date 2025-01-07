@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function Details() {
+export default function Test() {
     return (
         <div className="pt-6 text-center bg-[#F5F2FF] min-h-[100vh]">
             <p className="text-[40px]">何贵成专属视频</p>
