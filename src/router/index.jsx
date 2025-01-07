@@ -6,6 +6,7 @@ import Details from '@/views/details.jsx'
 import Demo from '@/views/demo.jsx'
 import WriteArticle from '@/views/write-article.jsx'
 import About from '@/views/about.jsx'
+import Test from '@/views/test.jsx'
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: '/about',
                 element: <About />,
+            },
+            {
+                path: '/test',
+                element: <Test />,
             },
         ],
     },
