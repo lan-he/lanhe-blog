@@ -21,10 +21,22 @@ export const getArticlest = (data) => {
         method: 'get',
     })
 }
-// 添加文章评论
-export const addComments = (data) => {
+export const articlesArticleIdComments = (data) => {
     return service({
-        url: `/api/comments`,
+        url: `/api/articles/${data.articleId}/comments`,
+        method: 'post',
+        data,
+    })
+}
+export const getArticlesComments = (data) => {
+    return service({
+        url: `/api/articles/${data.articleId}/comments`,
+        method: 'get',
+    })
+}
+export const articlesArticleIdCommentsAt = (data) => {
+    return service({
+        url: `/api/articles/${data.articleId}/comments/${data.commentId}`,
         method: 'post',
         data,
     })

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import AuthorInfo from '@/components/AuthorInfo.jsx'
-import MarkdownIt from 'markdown-it'
-
-export default function Details() {
+export default function MessageBoard() {
     const [aboutData, setAboutData] = useState([])
     useEffect(() => {
         onGetArticlest()

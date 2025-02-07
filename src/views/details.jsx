@@ -1,26 +1,71 @@
 import React, { useState, useEffect } from 'react'
-import { getArticlest, addComments } from '@/api/articles.js'
+import {
+    getArticlest,
+    articlesArticleIdComments,
+    getArticlesComments,
+} from '@/api/articles.js'
 import { useParams } from 'react-router-dom'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import Avatar from '@mui/material/Avatar'
+// import TextField from '@mui/material/TextField'
+// import Button from '@mui/material/Button'
+// import Avatar from '@mui/material/Avatar'
 
+import { Button, Input, Avatar } from 'antd'
+const { TextArea } = Input
 export default function Details() {
-    const [articlestData, setArticlestData] = useState([{}, {}, {}, {}, {}])
+    const [articlestData, setArticlestData] = useState({})
+    const [articlesComments, setArticlesComments] = useState([])
+    // 状态管理输入框的值
+    const [comment, setComment] = useState('')
+
     useEffect(() => {
         onGetArticlest()
+        onGetArticlesComments()
     }, [])
     const { id } = useParams() // 获取 URL 参数中的 id
     const onGetArticlest = async () => {
         const res = await getArticlest(id)
         setArticlestData(res)
     }
-    const onAddComments = async () => {
-        const res = await addComments({})
-        console.log(res)
+    const onGetArticlesComments = async () => {
+        const res = await getArticlesComments({
+            articleId: id,
+        })
+        console.log(res, 'resresres')
+        res.data.map((item) => {
+            item.isComment = false
+        })
+        setArticlesComments(res.data)
+    }
+    const onAddComments = async (commentIdThis) => {
+        return
+        const res = await articlesArticleIdComments({
+            articleId: Number(id),
+            content: comment,
+            parentCommentId: commentIdThis ? commentIdThis : null,
+        })
+        onGetArticlesComments()
+        setComment('')
+    }
+    // 处理输入框变化
+    const handleCommentChange = (event) => {
+        setComment(event.target.value)
+    }
+    const onAddCommentsClick = (item, index) => {
+        // 创建一个新的数组，避免直接修改原状态
+        const updatedComments = articlesComments.map((comment, i) => {
+            if (i === index) {
+                // 找到需要更新的评论，更新 isComment 字段
+                return {
+                    ...comment,
+                    isComment: !comment.isComment, // 切换 isComment 的值
+                }
+            }
+            return comment // 其他评论保持不变
+        })
+        setArticlesComments(updatedComments)
     }
     return (
-        <div className="flex justify-center gap-[20px] mt-[60px]">
+        <div className="flex justify-center gap-[20px] mt-[60px] pb-[100px]">
             <div className="w-[870px] flex flex-col gap-[20px]">
                 <div className=" border py-[28px] px-[36px]">
                     <h1 className="text-[32px]">{articlestData.title}</h1>
@@ -53,53 +98,118 @@ export default function Details() {
                             (已发表0条评论)
                         </span>
                     </h1>
-
-                    <div className="mt-[20px] flex justify-between gap-[20px]">
-                        <TextField
-                            className="flex-1"
-                            id="outlined-basic"
-                            label="昵称(必填)"
-                            variant="outlined"
-                        />
-                        <TextField
-                            className="flex-1"
-                            id="outlined-basic"
-                            label="邮箱"
-                            variant="outlined"
-                        />
+                    <TextArea rows={4} />
+                    <div className="flex justify-end">
+                        <Button
+                            className="!mt-[20px] ml-auto"
+                            variant="contained"
+                            onClick={() => {
+                                onAddComments()
+                            }}
+                        >
+                            发布评论
+                        </Button>
                     </div>
-                    <TextField
-                        className="w-full !mt-[20px]"
-                        label="说点什么吧..."
-                        multiline
-                        rows={4}
-                        defaultValue=""
-                    />
-                    <Button className="!mt-[20px]" variant="contained">
-                        发布评论
-                    </Button>
 
                     <div className="mt-[20px]">
                         <p>评论列表</p>
                         <hr className="mt-[5px]" />
-                        <div className=" p-[14px] hover:bg-slate-100 transition-all flex gap-[20px]">
-                            <Avatar
-                                alt="Remy Sharp"
-                                src="/static/images/avatar/1.jpg"
-                            />
-                            <div>
-                                <p className="text-[20px]">大流量卡</p>
-                                <span className="text-describe text-[14px]">
-                                    2023-09-15 13:52:54
-                                </span>
-                                <div className="mt-[8px]">
-                                    你好，看完你的博客文章，感觉很不错！希望与你网站首页友情链接
-                                    大流量卡 http://53go.cn
-                                    专注于移动/联通/电信推出的大流量多语音活动长短期套餐手机卡的相关知识的介绍普及
-                                    听说互换友情链接可以增加网站的收录量，特此来换，如果同意的话就给internetyewu@163.com发信息或者就在此回复下吧！
+                        {articlesComments.map((item, index) => {
+                            return (
+                                <div
+                                    key={item.id}
+                                    className="p-[14px] px-0 transition-all flex gap-[20px]"
+                                >
+                                    <Avatar
+                                        className="border"
+                                        alt="Remy Sharp"
+                                        src={item.user_avatar}
+                                    />
+                                    <div className="flex flex-col gap-[8px] w-full">
+                                        <p className="text-[13px] text-[#61666D]">
+                                            {item.user_nickname}
+                                        </p>
+                                        <div className="text-[#18191C] text-[15px]">
+                                            {item.content}
+                                        </div>
+                                        <div className="flex gap-[30px]">
+                                            <span className="text-describe text-[13px]">
+                                                {item.created_at}
+                                            </span>
+                                            <span
+                                                className="text-describe text-[13px] cursor-pointer"
+                                                onClick={() =>
+                                                    onAddCommentsClick(
+                                                        item,
+                                                        index
+                                                    )
+                                                }
+                                            >
+                                                回复
+                                            </span>
+                                        </div>
+                                        {item.replies.map((itemSon) => {
+                                            return (
+                                                <div
+                                                    key={itemSon.id}
+                                                    className="flex gap-[20px]"
+                                                >
+                                                    <Avatar
+                                                        className="border"
+                                                        alt="Remy Sharp"
+                                                        src={item.user_avatar}
+                                                    />
+                                                    <div className="gap-[20px]">
+                                                        <p className="text-[13px] text-[#61666D]">
+                                                            {
+                                                                itemSon.user_nickname
+                                                            }
+                                                        </p>
+                                                        <div className="text-[#18191C] text-[15px]">
+                                                            {itemSon.content}
+                                                        </div>
+                                                        <div className="flex gap-[30px]">
+                                                            <span className="text-describe text-[13px]">
+                                                                {
+                                                                    itemSon.created_at
+                                                                }
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                        {item.isComment && (
+                                            <div>
+                                                <TextArea
+                                                    className="w-full"
+                                                    label="请输入评论"
+                                                    variant="outlined"
+                                                    value={comment} // 绑定值
+                                                    onChange={
+                                                        handleCommentChange
+                                                    } // 监听变化
+                                                />
+                                                <div className="flex justify-end">
+                                                    <Button
+                                                        className="!mt-[20px] ml-auto"
+                                                        variant="contained"
+                                                        onClick={() => {
+                                                            onAddComments(
+                                                                item.id
+                                                            )
+                                                        }}
+                                                    >
+                                                        发布评论
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="border-b border-[#E3E5E7]"></div>
                                 </div>
-                            </div>
-                        </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>

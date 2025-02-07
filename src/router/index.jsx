@@ -4,9 +4,8 @@ import Index from '@/views/index.jsx'
 import ErrorPage from '@/views/error-page.jsx'
 import Details from '@/views/details.jsx'
 import Demo from '@/views/demo.jsx'
-import WriteArticle from '@/views/write-article.jsx'
+// import WriteArticle from '@/views/write-article.jsx'
 import About from '@/views/about.jsx'
-import Test from '@/views/test.jsx'
 
 const router = createBrowserRouter([
     {
@@ -26,17 +25,13 @@ const router = createBrowserRouter([
                 path: '/demo',
                 element: <Demo />,
             },
-            {
-                path: '/write-article',
-                element: <WriteArticle />,
-            },
+            // {
+            //     path: '/write-article',
+            //     element: <WriteArticle />,
+            // },
             {
                 path: '/about',
                 element: <About />,
-            },
-            {
-                path: '/test',
-                element: <Test />,
             },
         ],
     },

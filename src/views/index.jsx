@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react'
 import MarkdownHandle from '@/utils/markdown-handle.js'
-// import MarkdownLoader from '@/components/MarkdownLoader.jsx'
 import { articlesList } from '@/api/articles.js'
 import likeLottie from '@/assets/lottie/like.lottie'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import { useNavigate } from 'react-router-dom'
 import AuthorInfo from '@/components/AuthorInfo.jsx'
-import Skeleton from '@mui/material/Skeleton'
-import Stack from '@mui/material/Stack'
+import { Button, Input, Skeleton } from 'antd'
 
 export default function Index() {
     const [articleList, setarticleList] = useState([{}, {}, {}, {}, {}])
@@ -33,12 +29,14 @@ export default function Index() {
     return (
         <div className="flex justify-center gap-[20px] pt-6 m-auto">
             <div className="w-[800px] flex-grow-0">
+                <Button type="primary">Primary Button</Button>
+                <Input placeholder="Basic usage" />
                 {articleList.map((item, index) =>
-                    item._id ? (
+                    item.id ? (
                         <div
                             key={index}
                             className="p-8 py-3 border-b cursor-pointer"
-                            onClick={() => handleClick(item._id)}
+                            onClick={() => handleClick(item.id)}
                         >
                             <h1> {item.title}</h1>
                             <p className="text-sm truncate text-describe">
@@ -46,7 +44,9 @@ export default function Index() {
                             </p>
                             <div className="flex items-center justify-end text-[#8a919f] gap-6 mt-2">
                                 <div className="flex items-center gap-1">
-                                    <RemoveRedEyeIcon sx={{ fontSize: 20 }} />
+                                    <svg className="icon" ariaHidden="true">
+                                        <use xlinkHref="#icon-view"></use>
+                                    </svg>
                                     <span className="text-sm">
                                         {item.views}
                                     </span>
@@ -62,9 +62,12 @@ export default function Index() {
                                                 className="w-[50px] h-[50px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                                             />
                                         ) : (
-                                            <FavoriteBorderIcon
-                                                sx={{ fontSize: 20 }}
-                                            />
+                                            <svg
+                                                className="icon"
+                                                ariaHidden="true"
+                                            >
+                                                <use xlinkHref="#icon-like"></use>
+                                            </svg>
                                         )}
                                     </div>
                                     <span className="text-sm">
@@ -74,24 +77,9 @@ export default function Index() {
                             </div>
                         </div>
                     ) : (
-                        <Stack
-                            key={index}
-                            spacing={1}
-                            className="flex p-8 py-3 border-b"
-                        >
-                            <Skeleton variant="text" width={200} height={27} />
-                            <Skeleton
-                                variant="text"
-                                width={250}
-                                height={20}
-                                className="!mt-0"
-                            />
-                            <Skeleton
-                                variant="text"
-                                width={100}
-                                className="block !ml-auto !mt-0"
-                            />
-                        </Stack>
+                        <div className="p-8 py-3 border-b ">
+                            <Skeleton active />
+                        </div>
                     )
                 )}
             </div>

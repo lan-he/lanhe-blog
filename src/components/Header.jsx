@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import switchTheme from '@/assets/lottie/switch-theme.lottie'
-import Avatar from '@mui/material/Avatar'
-import Drawer from '@mui/material/Drawer'
 import { useSelector, useDispatch } from 'react-redux'
-import { setIsOpenLogin } from '@/store/indexReducer.js'
+import { setOpenLoginPopupWindow } from '@/store/indexSlice.js'
 import { NavLink } from 'react-router-dom'
-
+import { Avatar } from 'antd'
 function Header() {
     const [dotLottie, setDotLottie] = useState(null)
     const [lottieMode, setLottieMode] = useState('forward')
@@ -92,16 +90,14 @@ function Header() {
             )
         })
     }
-    const userInfo = useSelector((state) => state.persist.userInfo)
+    const userInfo = useSelector((state) => state.user.userInfo)
     const dispatch = useDispatch()
-
     const [open, setOpen] = React.useState(false)
     const onClickProfilePicture = () => {
-        console.log(userInfo, 'userInfouserInfouserInfo')
-        if (userInfo._id) {
+        if (userInfo) {
             setOpen(true)
         } else {
-            dispatch(setIsOpenLogin(true))
+            dispatch(setOpenLoginPopupWindow(true))
         }
     }
     return (
@@ -143,12 +139,12 @@ function Header() {
                         留言板
                     </NavLink>
                     <NavLink
-                        to={`/travel-notes`}
+                        to={`/game`}
                         className={({ isActive }) =>
                             isActive ? 'text-red-300' : ''
                         }
                     >
-                        游记
+                        Game
                     </NavLink>
                 </div>
                 <div className="flex items-center h-full gap-8">
@@ -162,13 +158,13 @@ function Header() {
                     />
                     <Avatar
                         alt="Login"
-                        src={userInfo.avatar}
+                        src={userInfo && userInfo.avatar}
                         className="border border-gray-400 cursor-pointer"
                         onClick={onClickProfilePicture}
                     />
                 </div>
             </div>
-            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+            {/* <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
                 <div className="w-[300px] py-8">
                     <div className="p-4 cursor-pointer hover:bg-slate-400">
                         <NavLink
@@ -181,7 +177,7 @@ function Header() {
                         </NavLink>
                     </div>
                 </div>
-            </Drawer>
+            </Drawer> */}
         </>
     )
 }
