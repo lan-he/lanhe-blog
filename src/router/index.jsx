@@ -7,6 +7,7 @@ import Demo from '@/views/demo.jsx'
 // import WriteArticle from '@/views/write-article.jsx'
 import About from '@/views/about.jsx'
 import Test from '@/views/test.jsx'
+import Hayday from '@/views/hayday.jsx'
 const router = createBrowserRouter([
     {
         path: '/',
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: '/test',
                 element: <Test />,
+            },
+            {
+                path: '/hayday',
+                element: <Hayday />,
             },
         ],
     },

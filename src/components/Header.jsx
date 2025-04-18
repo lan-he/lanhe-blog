@@ -113,7 +113,7 @@ function Header() {
                     Lanhe 的博客
                 </NavLink>
 
-                <div className="flex gap-10">
+                <div className="flex gap-10 md:hidden">
                     <NavLink
                         to={`/programming`}
                         className={({ isActive }) =>
@@ -139,12 +139,12 @@ function Header() {
                         留言板
                     </NavLink>
                     <NavLink
-                        to={`/game`}
+                        to={`/hayday`}
                         className={({ isActive }) =>
                             isActive ? 'text-red-300' : ''
                         }
                     >
-                        Game
+                        Hay Day
                     </NavLink>
                 </div>
                 <div className="flex items-center h-full gap-8">
